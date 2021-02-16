@@ -106,11 +106,6 @@ const UniIcon = styled.div`
   :hover {
     transform: rotate(-5deg);
   }
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    img { 
-      width: 0.25rem;
-    }
-  `};
 `
 
 const HeaderControls = styled.div`
