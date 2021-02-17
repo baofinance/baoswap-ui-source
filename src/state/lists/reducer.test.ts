@@ -3,7 +3,7 @@ import { DEFAULT_LIST_OF_LISTS, DEFAULT_TOKEN_LIST_URL } from '../../constants/l
 import { updateVersion } from '../global/actions'
 import { fetchTokenList, acceptListUpdate, addList, removeList, selectList } from './actions'
 import reducer, { ListsState } from './reducer'
-import UNISWAP_DEFAULT_TOKEN_LIST from 'honeyswap-default-token-list'
+import DEFAULT_TOKEN_LIST from '../../assets/default-token-list.json'
 
 const STUB_TOKEN_LIST = {
   name: '',
@@ -449,7 +449,7 @@ describe('list reducer', () => {
           if (url === DEFAULT_TOKEN_LIST_URL) {
             expect(s.byUrl[url]).toEqual({
               error: null,
-              current: UNISWAP_DEFAULT_TOKEN_LIST,
+              current: DEFAULT_TOKEN_LIST,
               loadingRequestId: null,
               pendingUpdate: null
             })
