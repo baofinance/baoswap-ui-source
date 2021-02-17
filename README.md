@@ -1,6 +1,7 @@
 # Honeyswap Interface
 
-[![Tests](https://github.com/Uniswap/uniswap-interface/workflows/Tests/badge.svg)](https://github.com/Uniswap/uniswap-interface/actions?query=workflow%3ATests)
+[![Lint](https://github.com/baofinance/baoswap-ui-source/workflows/Lint/badge.svg)](https://github.com/baofinance/baoswap-ui-source/actions?query=workflow%3ALint)
+[![Tests](https://github.com/baofinance/baoswap-ui-source/workflows/Tests/badge.svg)](https://github.com/baofinance/baoswap-ui-source/actions?query=workflow%3ATests)
 [![Styled With Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io/)
 
 An open source interface for Honeyswap -- a protocol for decentralized exchange of xDai tokens.
