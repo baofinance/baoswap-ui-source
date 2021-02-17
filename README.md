@@ -6,7 +6,7 @@
 An open source interface for Honeyswap -- a protocol for decentralized exchange of xDai tokens.
 
 - Interface: [baoswap.xyz](https://baoswap.xyz/)
-- Docs: [docs.bao.finance](https://about.1hive.org/docs/honeyswap)
+- Docs: [docs.bao.finance](https://docs.bao.finance/)
 - Twitter: [@thebaoman](https://twitter.com/thebaoman)
 - Discord: [Bao Finance Discord](https://discord.gg/BW3P62vJXT)
 
