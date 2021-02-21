@@ -6,14 +6,14 @@
 An open source interface for Honeyswap -- a protocol for decentralized exchange of xDai tokens.
 
 - Interface: [baoswap.xyz](https://baoswap.xyz/)
-- Docs: [docs.bao.finance](https://about.1hive.org/docs/honeyswap)
+- Docs: [docs.bao.finance](https://docs.bao.finance/)
 - Twitter: [@thebaoman](https://twitter.com/thebaoman)
 - Discord: [Bao Finance Discord](https://discord.gg/BW3P62vJXT)
 
 ## Accessing the Uniswap Interface
 
 To access the Uniswap Interface, use an IPFS gateway link from the
-[latest release](https://github.com/1Hive/uniswap-interface/releases/latest),
+[latest release](https://github.com/baofinance/ui/releases/latest),
 or visit [baoswap.xyz](https://baoswap.xyz).
 
 ## Listing a token
