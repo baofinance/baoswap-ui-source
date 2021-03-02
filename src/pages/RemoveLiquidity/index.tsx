@@ -538,7 +538,7 @@ export default function RemoveLiquidity({
                               currencyB === ETHER ? WETH[chainId].address : currencyIdB
                             }`}
                           >
-                            Receive WETH
+                            Receive WXDAI
                           </StyledInternalLink>
                         ) : oneCurrencyIsWETH ? (
                           <StyledInternalLink
