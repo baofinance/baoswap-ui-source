@@ -1,61 +1,31 @@
 {
-  "root": true,
-  "ignorePatterns": ["workers-site/", "build/", "public/", ".*"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:prettier/recommended",
-    "plugin:react/recommended", 
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint"
-  ],
   "parser": "@typescript-eslint/parser",
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest": true
-  },
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true,
-      "arrowFunctions": true
+      // Allows for the parsing of JSX
+      "jsx": true
     }
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
+  "ignorePatterns": [
+    "node_modules/**/*"
+  ],
   "settings": {
     "react": {
       "version": "detect"
-    },
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"],
-        "paths": ["./src"]
-      }
     }
   },
-  "globals": {
-    "importScripts": "readonly",
-    "window.bao": "writable",
-    "process": "readonly"
-  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
-    "comma-dangle": "off",
-    "function-paren-newline": "off",
-    "global-require": "off",
-    "import/no-dynamic-require": "off",
-    "no-inner-declarations": "off",
-    "class-methods-use-this": "off",
-    "import/extensions": "off",
-    "import/prefer-default-export": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-var-requires": "off",
-    "react/no-unescaped-entities": "off",
-    "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/no-empty-interface": "off",
-    "react/prop-types": "off",
-    "no-async-promise-executor": "off",
-    "no-case-declarations": "off"
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
