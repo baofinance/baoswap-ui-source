@@ -1,0 +1,24 @@
+name: Lint Code Base
+on: 
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: 
+      - main
+jobs:
+  linting:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v3
+        env:
+          DEFAULT_BRANCH: main
+          LINTER_RULES_PATH: /
+          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.js 
+          VALIDATE_JAVASCRIPT_ES: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
