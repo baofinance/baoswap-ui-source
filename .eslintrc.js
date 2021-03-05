@@ -3,6 +3,7 @@ module.exports = {
 	"ignorePatterns": ["workers-site/", "build/", "public/", ".*"],
   extends: [
     'eslint:recommended',
+    'airbnb',
     'plugin:prettier/recommended',
     'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
     'plugin:@typescript-eslint/eslint-recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
