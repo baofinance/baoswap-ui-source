@@ -16,7 +16,7 @@ export default function ListUpdatePopup({
   listUrl,
   oldList,
   newList,
-  auto,
+  auto
 }: {
   popKey: string
   listUrl: string

@@ -2,28 +2,24 @@ import { ChainId } from 'uniswap-xdai-sdk'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { Text } from 'rebass'
-
 import styled from 'styled-components'
-
-
 import { useActiveWeb3React } from '../../hooks'
-
 import { useETHBalances } from '../../state/wallet/hooks'
-
 import { YellowCard } from '../Card'
 import Settings from '../Settings'
 import Menu from '../Menu'
-
 import Row, { RowBetween } from '../Row'
 import Web3Status from '../Web3Status'
 import Logo from '../../assets/images/bao-logo.png'
 
- {/*import Logo from '../../assets/svg/logo.svg'
+{
+  /*import Logo from '../../assets/svg/logo.svg'
 import LogoDark from '../../assets/svg/logo_white.svg'
 import Wordmark from '../../assets/svg/wordmark.svg'
 import WordmarkDark from '../../assets/svg/wordmark_white.svg'
 import VersionSwitch from './VersionSwitch'
-import { useDarkModeManager } from '../../state/user/hooks'*/}
+import { useDarkModeManager } from '../../state/user/hooks'*/
+}
 
 const HeaderFrame = styled.div`
   display: flex;
@@ -143,7 +139,9 @@ export default function Header() {
   const { account, chainId } = useActiveWeb3React()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-  {/*const [isDark] = useDarkModeManager()*/}
+  {
+    /*const [isDark] = useDarkModeManager()*/
+  }
 
   return (
     <HeaderFrame>
@@ -154,7 +152,7 @@ export default function Header() {
               <img src={Logo} alt="logo" height="50px" width="50px" />
             </UniIcon>
             <TitleText>
-             {/* <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />*/}
+              {/* <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />*/}
             </TitleText>
           </Title>
         </HeaderElement>
@@ -173,7 +171,7 @@ export default function Header() {
             </AccountElement>
           </HeaderElement>
           <HeaderElementWrap>
-             {/* <VersionSwitch />*/}
+            {/* <VersionSwitch />*/}
             <Settings />
             <Menu />
           </HeaderElementWrap>

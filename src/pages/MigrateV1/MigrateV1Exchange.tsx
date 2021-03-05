@@ -205,8 +205,8 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
       {!isFirstLiquidityProvider && largePriceDifference ? (
         <YellowCard>
           <TYPE.body style={{ marginBottom: 8, fontWeight: 400 }}>
-            It{"'"}s best to deposit liquidity into Honeyswap V2 at a price you believe is correct. If the V2 price seems
-            incorrect, you can either make a swap to move the price or wait for someone else to do so.
+            It{"'"}s best to deposit liquidity into Honeyswap V2 at a price you believe is correct. If the V2 price
+            seems incorrect, you can either make a swap to move the price or wait for someone else to do so.
           </TYPE.body>
           <AutoColumn gap="8px">
             <RowBetween>
@@ -360,8 +360,8 @@ export default function MigrateV1Exchange({
         ) : validatedAddress && chainId && token?.equals(WETH[chainId]) ? (
           <>
             <TYPE.body my={9} style={{ fontWeight: 400 }}>
-              Because Honeyswap V2 uses WETH under the hood, your Honeyswap V1 WETH/ETH liquidity cannot be migrated. You
-              may want to remove your liquidity instead.
+              Because Honeyswap V2 uses WETH under the hood, your Honeyswap V1 WETH/ETH liquidity cannot be migrated.
+              You may want to remove your liquidity instead.
             </TYPE.body>
 
             <ButtonConfirmed
