@@ -1,6 +1,6 @@
 module.exports = {
-	root: true,
-	"ignorePatterns": ["workers-site/", "build/", "public/", ".*"],
+  root: true,
+  "ignorePatterns": ["workers-site/", "build/", "public/", ".*"],
   extends: [
     'eslint:recommended',
     'plugin:prettier/recommended',
