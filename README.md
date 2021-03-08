@@ -13,7 +13,7 @@ An open source interface for Honeyswap -- a protocol for decentralized exchange 
 ## Accessing the Uniswap Interface
 
 To access the Uniswap Interface, use an IPFS gateway link from the
-[latest release](https://github.com/baofinance/ui/releases/latest),
+[latest release](https://github.com/baofinance/baoswap-ui/releases/latest),
 or visit [baoswap.xyz](https://baoswap.xyz).
 
 ## Listing a token
