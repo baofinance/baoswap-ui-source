@@ -196,7 +196,7 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
         trustless thanks to the{' '}
         {chainId && (
           <ExternalLink href={getEtherscanLink(chainId, MIGRATOR_ADDRESS, 'address')}>
-            <TYPE.blue display="inline">Honeyswap migration contract↗</TYPE.blue>
+            <TYPE.blue display="inline">BaoSwap migration contract↗</TYPE.blue>
           </ExternalLink>
         )}
         .
@@ -205,7 +205,7 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
       {!isFirstLiquidityProvider && largePriceDifference ? (
         <YellowCard>
           <TYPE.body style={{ marginBottom: 8, fontWeight: 400 }}>
-            It{"'"}s best to deposit liquidity into Honeyswap V2 at a price you believe is correct. If the V2 price
+            It{"'"}s best to deposit liquidity into BaoSwap V2 at a price you believe is correct. If the V2 price
             seems incorrect, you can either make a swap to move the price or wait for someone else to do so.
           </TYPE.body>
           <AutoColumn gap="8px">
@@ -246,7 +246,7 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
       {isFirstLiquidityProvider && (
         <PinkCard>
           <TYPE.body style={{ marginBottom: 8, fontWeight: 400 }}>
-            You are the first liquidity provider for this pair on Honeyswap V2. Your liquidity will be migrated at the
+            You are the first liquidity provider for this pair on BaoSwap V2. Your liquidity will be migrated at the
             current V1 price. Your transaction cost also includes the gas to create the pool.
           </TYPE.body>
 
@@ -309,7 +309,7 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
         </div>
       </LightCard>
       <TYPE.darkGray style={{ textAlign: 'center' }}>
-        {`Your Honeyswap V1 ${token.symbol}/ETH liquidity will become Honeyswap V2 ${token.symbol}/ETH liquidity.`}
+        {`Your BaoSwap V1 ${token.symbol}/ETH liquidity will become BaoSwap V2 ${token.symbol}/ETH liquidity.`}
       </TYPE.darkGray>
     </AutoColumn>
   )
@@ -332,7 +332,7 @@ export default function MigrateV1Exchange({
   const liquidityToken: Token | undefined = useMemo(
     () =>
       validatedAddress && chainId && token
-        ? new Token(chainId, validatedAddress, 18, `UNI-V1-${token.symbol}`, 'Honeyswap V1')
+        ? new Token(chainId, validatedAddress, 18, `BAO-V1-${token.symbol}`, 'BaoSwap V1')
         : undefined,
     [chainId, validatedAddress, token]
   )
@@ -351,7 +351,7 @@ export default function MigrateV1Exchange({
           <BackArrow to="/migrate/v1" />
           <TYPE.mediumHeader>Migrate V1 Liquidity</TYPE.mediumHeader>
           <div>
-            <QuestionHelper text="Migrate your liquidity tokens from Honeyswap V1 to Honeyswap V2." />
+            <QuestionHelper text="Migrate your liquidity tokens from BaoSwap V1 to BaoSwap V2." />
           </div>
         </AutoRow>
 
@@ -360,7 +360,7 @@ export default function MigrateV1Exchange({
         ) : validatedAddress && chainId && token?.equals(WETH[chainId]) ? (
           <>
             <TYPE.body my={9} style={{ fontWeight: 400 }}>
-              Because Honeyswap V2 uses WETH under the hood, your Honeyswap V1 WETH/ETH liquidity cannot be migrated.
+              Because BaoSwap V2 uses WETH under the hood, your BaoSwap V1 WETH/ETH liquidity cannot be migrated.
               You may want to remove your liquidity instead.
             </TYPE.body>
 
