@@ -9,7 +9,7 @@ import { useDarkModeManager } from '../../state/user/hooks'
 
 import listLight from '../../assets/images/token-list/lists-light.png'
 import listDark from '../../assets/images/token-list/lists-dark.png'
-//import { ExternalLink } from '../../theme'
+import { ExternalLink } from '../../theme'
 export default function ListIntroduction({ onSelectList }: { onSelectList: () => void }) {
   const [isDark] = useDarkModeManager()
 
