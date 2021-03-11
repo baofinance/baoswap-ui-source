@@ -294,12 +294,28 @@ export default function WalletModal({
                 <h4>Please connect to the xDai network.</h4>
                 <p>Use the following Custom RPC network settings:</p>
                 <ul>
-                  <li>Network Name: <b>xDai</b></li>
-                  <li>New RPC URL: <a href="https://rpc.xdaichain.com/">https://rpc.xdaichain.com/</a></li>
-                  <li>Chain ID: <b>0x64</b> (100)</li><li>Symbol: <b>xDai</b></li>
-                  <li>Block Explorer URL: <a href="https://blockscout.com/poa/xdai">https://blockscout.com/poa/xdai</a></li>
+                  <li>
+                    Network Name: <b>xDai</b>
+                  </li>
+                  <li>
+                    New RPC URL: <a href="https://rpc.xdaichain.com/">https://rpc.xdaichain.com/</a>
+                  </li>
+                  <li>
+                    Chain ID: <b>0x64</b> (100)
+                  </li>
+                  <li>
+                    Symbol: <b>xDai</b>
+                  </li>
+                  <li>
+                    Block Explorer URL: <a href="https://blockscout.com/poa/xdai">https://blockscout.com/poa/xdai</a>
+                  </li>
                 </ul>
-                <p>For more info visit <a href="https://www.xdaichain.com/for-users/wallets/metamask/metamask-setup">https://www.xdaichain.com/for-users/wallets/metamask/metamask-setup</a></p>
+                <p>
+                  For more info visit{' '}
+                  <a href="https://www.xdaichain.com/for-users/wallets/metamask/metamask-setup">
+                    https://www.xdaichain.com/for-users/wallets/metamask/metamask-setup
+                  </a>
+                </p>
               </div>
             ) : (
               'Error connecting. Try refreshing the page.'
