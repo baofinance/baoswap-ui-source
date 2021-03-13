@@ -246,8 +246,8 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
       {isFirstLiquidityProvider && (
         <PinkCard>
           <TYPE.body style={{ marginBottom: 8, fontWeight: 400 }}>
-            You are the first liquidity provider for this pair on BaoSwap V2. Your liquidity will be migrated at the current V1 price.
-            Your transaction cost also includes the gas to create the pool.
+            You are the first liquidity provider for this pair on BaoSwap V2. Your liquidity will be migrated at the
+            current V1 price. Your transaction cost also includes the gas to create the pool.
           </TYPE.body>
 
           <AutoColumn gap="8px">
