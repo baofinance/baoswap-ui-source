@@ -96,7 +96,7 @@ export default function Menu() {
             <Info size={14} />
             About
           </MenuItem>
-          <MenuItem id="link" href="https://www.bao.finance/">
+          <MenuItem id="link" href="https://xdai.bao.finance/">
             <Info size={14} />
             Farm
           </MenuItem>
