@@ -12,8 +12,8 @@ An open source interface for Baoswap -- a protocol for decentralized exchange of
 
 ## Accessing the Baoswap Interface
 
-To access the Baoswap Interface, use an IPFS gateway link from the
-[latest release](https://github.com/1Hive/uniswap-interface/releases/latest),
+To access the Uniswap Interface, use an IPFS gateway link from the
+[latest release](https://github.com/baofinance/baoswap-ui/releases/latest),
 or visit [baoswap.xyz](https://baoswap.xyz).
 
 ## Listing a token
