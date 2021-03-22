@@ -35,6 +35,7 @@ export function retry<T>(
   let rejectCancelled: (error: Error) => void
   const promise = new Promise<T>(async (resolve, reject) => {
     rejectCancelled = reject
+    /* eslint-disable */
     while (true) {
       let result: T
       try {

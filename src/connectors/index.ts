@@ -52,6 +52,5 @@ export const portis = new PortisConnector({
 export const walletlink = new WalletLinkConnector({
   url: NETWORK_URL,
   appName: 'Baoswap',
-  appLogoUrl:
-    'https://i.imgur.com/QdfaOR1.png'
+  appLogoUrl: 'https://i.imgur.com/QdfaOR1.png'
 })

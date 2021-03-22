@@ -1,0 +1,26 @@
+name: Lint Code Base
+on: 
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: 
+      - main
+jobs:
+  linting:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Run linting
+        run: yarn lint

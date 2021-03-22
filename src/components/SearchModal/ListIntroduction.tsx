@@ -9,7 +9,7 @@ import { useDarkModeManager } from '../../state/user/hooks'
 
 import listLight from '../../assets/images/token-list/lists-light.png'
 import listDark from '../../assets/images/token-list/lists-dark.png'
-//import { ExternalLink } from '../../theme'
+import { ExternalLink } from '../../theme'
 export default function ListIntroduction({ onSelectList }: { onSelectList: () => void }) {
   const [isDark] = useDarkModeManager()
 
@@ -36,6 +36,8 @@ export default function ListIntroduction({ onSelectList }: { onSelectList: () =>
           <OutlineCard style={{ marginBottom: '8px', padding: '1rem' }}>
             <Text fontWeight={400} fontSize={14} style={{ textAlign: 'center' }}>
               Token lists are an{' '}
+              <ExternalLink href="https://github.com/uniswap/token-lists">open specification</ExternalLink>. Check out{' '}
+              <ExternalLink href="https://tokenlists.org">tokenlists.org</ExternalLink> to learn more.
             </Text>
           </OutlineCard>
         </AutoColumn>

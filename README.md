@@ -1,16 +1,16 @@
-# Honeyswap Interface
+# Baoswap Interface
 
 [![Tests](https://github.com/Uniswap/uniswap-interface/workflows/Tests/badge.svg)](https://github.com/Uniswap/uniswap-interface/actions?query=workflow%3ATests)
 [![Styled With Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io/)
 
-An open source interface for Honeyswap -- a protocol for decentralized exchange of xDai tokens.
+An open source interface for Baoswap -- a protocol for decentralized exchange of Bao tokens.
 
 - Interface: [baoswap.xyz](https://baoswap.xyz/)
 - Docs: [docs.bao.finance](https://docs.bao.finance/)
 - Twitter: [@thebaoman](https://twitter.com/thebaoman)
 - Discord: [Bao Finance Discord](https://discord.gg/BW3P62vJXT)
 
-## Accessing the Uniswap Interface
+## Accessing the Baoswap Interface
 
 To access the Uniswap Interface, use an IPFS gateway link from the
 [latest release](https://github.com/baofinance/baoswap-ui/releases/latest),
@@ -49,5 +49,5 @@ The interface will not work on other networks.
 
 ## Contributions
 
-**Please open all pull requests against the `master` branch.**
+**Please open all pull requests against the `main` branch.**
 CI checks will run against all PRs.
