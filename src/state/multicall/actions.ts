@@ -3,6 +3,7 @@ import { createAction } from '@reduxjs/toolkit'
 export interface Call {
   address: string
   callData: string
+  chainId: number | undefined
 }
 
 const ADDRESS_REGEX = /^0x[a-fA-F0-9]{40}$/
@@ -14,17 +15,18 @@ export function toCallKey(call: Call): string {
   if (!LOWER_HEX_REGEX.test(call.callData)) {
     throw new Error(`Invalid hex: ${call.callData}`)
   }
-  return `${call.address}-${call.callData}`
+  return `${call.address}-${call.callData}-${call.chainId}`
 }
 
 export function parseCallKey(callKey: string): Call {
   const pcs = callKey.split('-')
-  if (pcs.length !== 2) {
+  if (pcs.length !== 3) {
     throw new Error(`Invalid call key: ${callKey}`)
   }
   return {
     address: pcs[0],
-    callData: pcs[1]
+    callData: pcs[1],
+    chainId: Number(pcs[2])
   }
 }
 

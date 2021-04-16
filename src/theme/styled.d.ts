@@ -71,6 +71,13 @@ declare module 'styled-components' {
       upToLarge: ThemedCssFunction<DefaultTheme>
     }
 
+    mediaMinWidth: {
+      downToExtraSmall: ThemedCssFunction<DefaultTheme>
+      downToSmall: ThemedCssFunction<DefaultTheme>
+      downToMedium: ThemedCssFunction<DefaultTheme>
+      downToLarge: ThemedCssFunction<DefaultTheme>
+    }
+
     // css snippets
     flexColumnNoWrap: FlattenSimpleInterpolation
     flexRowNoWrap: FlattenSimpleInterpolation

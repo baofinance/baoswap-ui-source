@@ -30,7 +30,7 @@ export default function ListUpdatePopup({
 
   const handleTokenLists = (tokenList: TokenInfo[]) => {
     let returnTokenList = ''
-    tokenList.map((token, index) => {
+    tokenList.forEach((token, index) => {
       returnTokenList += token.symbol
       returnTokenList += index !== tokenList.length - 1 ? ', ' : ''
     })

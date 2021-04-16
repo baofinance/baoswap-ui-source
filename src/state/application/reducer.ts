@@ -40,7 +40,7 @@ export default createReducer(initialState, builder =>
     .addCase(toggleSettingsMenu, state => {
       state.settingsMenuOpen = !state.settingsMenuOpen
     })
-    .addCase(addPopup, (state, { payload: { content, key, removeAfterMs = 15000 } }) => {
+    .addCase(addPopup, (state, { payload: { content, key, removeAfterMs = 5000 } }) => {
       state.popupList = (key ? state.popupList.filter(popup => popup.key !== key) : state.popupList).concat([
         {
           key: key || nanoid(),

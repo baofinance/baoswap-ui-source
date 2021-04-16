@@ -3,8 +3,13 @@
   "name": "Baoswap",
   "icons": [
       {
+        "src": "images/bao.png",
+        "sizes": "336x313",
+        "type": "image/png"
+      },
+      {
         "src": "favicon.ico",
-        "sizes": "64x64 32x32 24x24 16x16",
+        "sizes": "32x32",
         "type": "image/x-icon"
       }
   ],

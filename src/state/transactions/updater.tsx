@@ -1,9 +1,12 @@
-import { useEffect } from 'react'
+import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
+import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { ChainId } from 'uniswap-xdai-sdk'
 import { useActiveWeb3React } from '../../hooks'
 import { useAddPopup, useBlockNumber } from '../application/hooks'
 import { AppDispatch, AppState } from '../index'
 import { checkedTransaction, finalizeTransaction } from './actions'
+import { Web3Provider } from '@ethersproject/providers'
 
 export function shouldCheck(
   lastBlockNumber: number,
@@ -26,15 +29,17 @@ export function shouldCheck(
   }
 }
 
-export default function Updater(): null {
-  const { chainId, library } = useActiveWeb3React()
+export default function Updater(
+  web3?: (Web3ReactContextInterface<Web3Provider> & { chainId?: ChainId }) | undefined
+): null {
+  const { chainId, library } = web3 ?? useActiveWeb3React()
 
-  const lastBlockNumber = useBlockNumber()
+  const lastBlockNumber = useBlockNumber(chainId)
 
   const dispatch = useDispatch<AppDispatch>()
   const state = useSelector<AppState, AppState['transactions']>(state => state.transactions)
 
-  const transactions = chainId ? state[chainId] ?? {} : {}
+  const transactions = useMemo(() => (chainId ? state[chainId] ?? {} : {}), [chainId, state])
 
   // show popup on confirm
   const addPopup = useAddPopup()

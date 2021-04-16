@@ -8110,11 +8110,6 @@ home-or-tmp@^2.0.0:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.1"
 
-honeyswap-default-token-list@^1.3.1:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/honeyswap-default-token-list/-/honeyswap-default-token-list-1.3.5.tgz#33c056b8d1c647761a97e6de76481e19927bdd75"
-  integrity sha512-aJGB/98l2vBqWgB9VeI7cDV4oqCmMe+/s+ZBPBQTZ8McIxWvDHepxfl5v4MlCaNLDrjrNIn0H7KTlcw1u7nDgg==
-
 hosted-git-info@^2.1.4:
   version "2.8.8"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.8.tgz#7539bd4bc1e0e0a895815a2e0262420b12858488"

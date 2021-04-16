@@ -16,7 +16,8 @@ import {
   updateUserDarkMode,
   updateUserDeadline,
   updateUserExpertMode,
-  updateUserSlippageTolerance
+  updateUserSlippageTolerance,
+  updateUserSortByAPY
 } from './actions'
 
 function serializeToken(token: Token): SerializedToken {
@@ -52,6 +53,21 @@ export function useIsDarkMode(): boolean {
   )
 
   return userDarkMode === null ? matchesDarkMode : userDarkMode
+}
+
+export function useSortByAPY(): boolean {
+  return useSelector<AppState, AppState['user']['userSortByAPY']>(state => state.user.userSortByAPY) ?? false
+}
+
+export function useSortByAPYManager(): [boolean, () => void] {
+  const dispatch = useDispatch<AppDispatch>()
+  const sortByAPY = useSortByAPY()
+
+  const toggleSetSortByAPY = useCallback(() => {
+    dispatch(updateUserSortByAPY({ userSortByAPY: !sortByAPY }))
+  }, [sortByAPY, dispatch])
+
+  return [sortByAPY, toggleSetSortByAPY]
 }
 
 export function useDarkModeManager(): [boolean, () => void] {

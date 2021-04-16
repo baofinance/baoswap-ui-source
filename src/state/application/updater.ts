@@ -1,13 +1,18 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useActiveWeb3React } from '../../hooks'
+import { Web3Provider } from '@ethersproject/providers'
 import useDebounce from '../../hooks/useDebounce'
 import useIsWindowVisible from '../../hooks/useIsWindowVisible'
 import { updateBlockNumber } from './actions'
 import { useDispatch } from 'react-redux'
+import { ChainId } from 'uniswap-xdai-sdk'
+import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
+import { useActiveWeb3React } from '../../hooks'
 
-export default function Updater(): null {
-  const { library, chainId } = useActiveWeb3React()
+export default function Updater(
+  web3?: (Web3ReactContextInterface<Web3Provider> & { chainId?: ChainId }) | undefined
+): null {
   const dispatch = useDispatch()
+  const { chainId, library } = web3 ?? useActiveWeb3React()
 
   const windowVisible = useIsWindowVisible()
 

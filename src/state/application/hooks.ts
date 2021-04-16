@@ -3,9 +3,11 @@ import { useActiveWeb3React } from '../../hooks'
 import { addPopup, PopupContent, removePopup, toggleWalletModal, toggleSettingsMenu } from './actions'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../index'
+import { ChainId } from 'uniswap-xdai-sdk'
 
-export function useBlockNumber(): number | undefined {
-  const { chainId } = useActiveWeb3React()
+export function useBlockNumber(overrideChainId?: ChainId | undefined): number | undefined {
+  const activeWeb3 = useActiveWeb3React()
+  const chainId = overrideChainId ?? activeWeb3.chainId
 
   return useSelector((state: AppState) => state.application.blockNumber[chainId ?? -1])
 }

@@ -1,25 +1,18 @@
 import { ChainId } from 'uniswap-xdai-sdk'
-import React from 'react'
-import { isMobile } from 'react-device-detect'
+import React, { useContext } from 'react'
 import { Text } from 'rebass'
-import styled from 'styled-components'
-import { useActiveWeb3React } from '../../hooks'
+import styled, { ThemeContext } from 'styled-components'
+import { useActiveWeb3React, useForeignWeb3React } from '../../hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
-import { YellowCard } from '../Card'
+import { LightCard } from '../Card'
 import Settings from '../Settings'
 import Menu from '../Menu'
-import Row, { RowBetween } from '../Row'
+import { RowBetween, RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
-import Logo from '../../assets/images/bao-logo.png'
+import { Zap, ZapOff } from 'react-feather'
+// import Logo from '../../assets/images/bao-logo.png'
 
-{
-  /*import Logo from '../../assets/svg/logo.svg'
-import LogoDark from '../../assets/svg/logo_white.svg'
-import Wordmark from '../../assets/svg/wordmark.svg'
-import WordmarkDark from '../../assets/svg/wordmark_white.svg'
-import VersionSwitch from './VersionSwitch'
-import { useDarkModeManager } from '../../state/user/hooks'*/
-}
+import { ColumnCenter as Column } from '../Column'
 
 const HeaderFrame = styled.div`
   display: flex;
@@ -61,14 +54,6 @@ const Title = styled.a`
   }
 `
 
-const TitleText = styled(Row)`
-  width: fit-content;
-  white-space: nowrap;
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    display: none;
-  `};
-`
-
 const AccountElement = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: row;
@@ -86,28 +71,27 @@ const AccountElement = styled.div<{ active: boolean }>`
 const TestnetWrapper = styled.div`
   white-space: nowrap;
   width: fit-content;
-  margin-left: 10px;
+  margin: 5px;
   pointer-events: auto;
 `
 
-const NetworkCard = styled(YellowCard)`
+const NetworkCard = styled(LightCard)`
   width: fit-content;
-  margin-right: 10px;
   border-radius: 12px;
-  padding: 8px 12px;
+  padding: 6px;
+  background-color: ${({ theme }) => theme.advancedBG};
 `
 
-const UniIcon = styled.div`
-  transition: transform 0.3s ease;
-  :hover {
-    transform: rotate(-5deg);
-  }
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    img { 
-      width: 0.25rem;
-    }
-  `};
-`
+// const BaoIcon = styled.div`
+//   transition: transform 0.3s ease;
+//   :hover {
+//     transform: rotate(-5deg);
+//   }
+//   img {
+//     width: 50px;
+//     height: 50px;
+//   }
+// `
 
 const HeaderControls = styled.div`
   display: flex;
@@ -127,7 +111,7 @@ const BalanceText = styled(Text)`
 `
 
 const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
-  [ChainId.MAINNET]: null,
+  [ChainId.MAINNET]: 'Ethereum',
   [ChainId.RINKEBY]: 'Rinkeby',
   [ChainId.ROPSTEN]: 'Ropsten',
   [ChainId.GÖRLI]: 'Görli',
@@ -136,35 +120,72 @@ const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
 }
 
 export default function Header() {
-  const { account, chainId } = useActiveWeb3React()
+  const theme = useContext(ThemeContext)
+  const { account, chainId, active, error } = useActiveWeb3React()
+  const { chainId: mainChainId, active: mainActive, error: mainError } = useForeignWeb3React()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-  {
-    /*const [isDark] = useDarkModeManager()*/
-  }
 
   return (
     <HeaderFrame>
       <RowBetween style={{ alignItems: 'flex-start' }} padding="1rem 1rem 0 1rem">
         <HeaderElement>
-          <Title href=".">
-            <UniIcon>
-              <img src={Logo} alt="logo" height="50px" width="50px" />
-            </UniIcon>
-            <TitleText>
-              {/* <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />*/}
-            </TitleText>
-          </Title>
+          <Title href=".">{/* <BaoIcon>
+              <img src={Logo} alt="logo" />
+            </BaoIcon> */}</Title>
         </HeaderElement>
         <HeaderControls>
           <HeaderElement>
             <TestnetWrapper>
-              {!isMobile && chainId && NETWORK_LABELS[chainId] && <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>}
+              {chainId && active && NETWORK_LABELS[chainId] && (
+                <NetworkCard>
+                  <Column style={{ padding: 0, margin: 0 }}>
+                    <RowBetween>
+                      {active && !error ? (
+                        <Zap size="10pt" style={{ color: theme.primary1 }} />
+                      ) : (
+                        <ZapOff size="10pt" style={{ color: theme.red1 }} />
+                      )}
+                      <Text paddingLeft="0.15rem" fontWeight={800} fontSize={10}>
+                        {NETWORK_LABELS[chainId]}
+                      </Text>
+                    </RowBetween>
+                    <RowFixed>
+                      <Text fontWeight={300} fontSize={9}>
+                        ACTIVE
+                      </Text>
+                    </RowFixed>
+                  </Column>
+                </NetworkCard>
+              )}
+            </TestnetWrapper>
+            <TestnetWrapper>
+              {mainChainId && NETWORK_LABELS[mainChainId] && (
+                <NetworkCard>
+                  <Column style={{ padding: 0, margin: 0 }}>
+                    <RowBetween>
+                      {mainActive && !mainError ? (
+                        <Zap size="10pt" style={{ color: theme.primary1 }} />
+                      ) : (
+                        <ZapOff size="10pt" style={{ color: theme.red1 }} />
+                      )}
+                      <Text paddingLeft="0.15rem" fontWeight={800} fontSize={10}>
+                        {NETWORK_LABELS[mainChainId]}
+                      </Text>
+                    </RowBetween>
+                    <RowFixed>
+                      <Text fontWeight={300} fontSize={9}>
+                        FOREIGN
+                      </Text>
+                    </RowFixed>
+                  </Column>
+                </NetworkCard>
+              )}
             </TestnetWrapper>
             <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
               {account && userEthBalance ? (
                 <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                  {userEthBalance?.toSignificant(4)} {chainId === 100 ? 'DAI' : 'ETH'}
+                  {userEthBalance?.toSignificant(4)} {chainId === 100 ? 'xDAI' : 'ETH'}
                 </BalanceText>
               ) : null}
               <Web3Status />

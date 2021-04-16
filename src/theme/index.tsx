@@ -1,4 +1,4 @@
-import { transparentize } from 'polished'
+import { darken, lighten, transparentize } from 'polished'
 import React, { useMemo } from 'react'
 import styled, {
   ThemeProvider as StyledComponentsThemeProvider,
@@ -19,6 +19,13 @@ const MEDIA_WIDTHS = {
   upToLarge: 1280
 }
 
+const MEDIA_MIN_WIDTHS = {
+  downToExtraSmall: 500,
+  downToSmall: 600,
+  downToMedium: 960,
+  downToLarge: 1280
+}
+
 const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } = Object.keys(MEDIA_WIDTHS).reduce(
   (accumulator, size) => {
     ;(accumulator as any)[size] = (a: any, b: any, c: any) => css`
@@ -31,6 +38,17 @@ const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } 
   {}
 ) as any
 
+const mediaMinWidthTemplates: { [width in keyof typeof MEDIA_MIN_WIDTHS]: typeof css } = Object.keys(
+  MEDIA_MIN_WIDTHS
+).reduce((accumulator, size) => {
+  ;(accumulator as any)[size] = (a: any, b: any, c: any) => css`
+    @media (min-width: ${(MEDIA_MIN_WIDTHS as any)[size]}px) {
+      ${css(a, b, c)}
+    }
+  `
+  return accumulator
+}, {}) as any
+
 const white = '#FFFFFF'
 const black = '#000000'
 
@@ -41,9 +59,9 @@ export function colors(darkMode: boolean): Colors {
     black,
 
     // gradient colors
-    grd1: darkMode ? '#FFC3AB' : '#FED8B1',
-    grd2: darkMode ? '#FFC3AB' : '#FFC3AB',
-    grd3: darkMode ? '#FFC3AB' : '#FDD9B5',
+    grd1: darken(darkMode ? 0.05 : 0, '#FFC3AB'),
+    grd2: darken(darkMode ? 0.05 : 0, '#fff8ee'),
+    grd3: darken(darkMode ? 0.05 : 0, '#FFC3AB'),
 
     // text
     text1: darkMode ? '#FFFFFF' : '#000000',
@@ -53,25 +71,25 @@ export function colors(darkMode: boolean): Colors {
     text5: darkMode ? '#2C2F36' : '#EDEEF2',
 
     // backgrounds / greys
-    bg1: darkMode ? '#212429' : '#FFFFFF',
-    bg2: darkMode ? '#2C2F36' : '#F7F8FA',
-    bg3: darkMode ? '#40444F' : '#EDEEF2',
+    bg1: darkMode ? '#212429' : lighten(0.02, '#FFF8EE'),
+    bg2: darkMode ? '#2C2F36' : '#FFFCF5',
+    bg3: darkMode ? '#363a46' : '#EDEEF2',
     bg4: darkMode ? '#565A69' : '#CED0D9',
     bg5: darkMode ? '#6C7284' : '#888D9B',
 
     //specialty colors
-    modalBG: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
-    advancedBG: darkMode ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.6)',
+    modalBG: darkMode ? transparentize(0.3, '#212429') : 'rgba(0,0,0,0.3)',
+    advancedBG: darkMode ? transparentize(0.2, '#212429') : 'rgba(255,255,255,0.6)',
 
     //primary colors
-    primary1: darkMode ? '#26a697' : '#1974D2',
-    primary2: darkMode ? '#45d3c5' : '#1974D2',
-    primary3: darkMode ? '#97e7de' : '#1974D2',
-    primary4: darkMode ? '#CBF3EF' : '#1974D2',
-    primary5: darkMode ? '#CBF3EF' : '#1974D2',
+    primary1: darkMode ? darken(0.05, '#FFC3AB') : darken(0.1, '#FFC3AB'),
+    primary2: darkMode ? '#F07C12' : '#FF8884',
+    primary3: darkMode ? '#F2E2D7' : '#F2E2D7',
+    primary4: darkMode ? '#F2E2D7' : '#F2E2D7',
+    primary5: darkMode ? '#F2E2D7' : '#F2E2D7',
 
     // color text
-    primaryText1: darkMode ? 'rgba(44, 52, 55, 0.8)' : '#ffff',
+    primaryText1: darkMode ? '#5B3A26' : '#5B3A26',
 
     // secondary colors
     secondary1: darkMode ? '#30cfbf' : '#1974D2',
@@ -106,6 +124,7 @@ export function theme(darkMode: boolean): DefaultTheme {
 
     // media queries
     mediaWidth: mediaWidthTemplates,
+    mediaMinWidth: mediaMinWidthTemplates,
 
     // css snippets
     flexColumnNoWrap: css`
@@ -211,11 +230,11 @@ html {
 export const ThemedGlobalStyle = createGlobalStyle`
 html {
   color: ${({ theme }) => theme.text1};
+  background-position: 0 -30vh;
   background-color: ${({ theme }) => theme.grd1};
   background: linear-gradient(111.63deg, ${({ theme }) => theme.grd1} 0%, ${({ theme }) => theme.grd2} 49.48%, ${({
   theme
 }) => theme.grd3} 100%);
-}
 
 body {
   min-height: 100vh;

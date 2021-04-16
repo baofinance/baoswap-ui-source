@@ -3,10 +3,12 @@ import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
-import { network } from '../../connectors'
+import { foreignNetwork, network } from '../../connectors'
 import { useEagerConnect, useInactiveListener } from '../../hooks'
-import { NetworkContextName } from '../../constants'
+import { ForeignNetworkContextName, NetworkContextName } from '../../constants'
 import Loader from '../Loader'
+import { ButtonPrimary } from '../Button'
+import { useWalletModalToggle } from '../../state/application/hooks'
 
 const MessageWrapper = styled.div`
   display: flex;
@@ -23,16 +25,32 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
   const { t } = useTranslation()
   const { active } = useWeb3React()
   const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React(NetworkContextName)
+  const { active: foreignNetworkActive, error: foreignNetworkError, activate: foreignActivateNetwork } = useWeb3React(
+    ForeignNetworkContextName
+  )
 
   // try to eagerly connect to an injected provider, if it exists and has granted access already
   const triedEager = useEagerConnect()
+  const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
 
   // after eagerly trying injected, if the network connect ever isn't active or in an error state, activate itd
   useEffect(() => {
     if (triedEager && !networkActive && !networkError && !active) {
       activateNetwork(network)
     }
-  }, [triedEager, networkActive, networkError, activateNetwork, active])
+    if (!foreignNetworkActive && !foreignNetworkError) {
+      foreignActivateNetwork(foreignNetwork)
+    }
+  }, [
+    triedEager,
+    networkActive,
+    networkError,
+    activateNetwork,
+    active,
+    foreignNetworkActive,
+    foreignNetworkError,
+    foreignActivateNetwork
+  ])
 
   // when there's no account connected, react to logins (broadly speaking) on the injected provider, if it exists
   useInactiveListener(!triedEager)
@@ -59,6 +77,7 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
     return (
       <MessageWrapper>
         <Message>{t('unknownError')}</Message>
+        <ButtonPrimary onClick={toggleWalletModal}>Connect Wallet</ButtonPrimary>
       </MessageWrapper>
     )
   }
@@ -68,6 +87,7 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
     return showLoader ? (
       <MessageWrapper>
         <Loader />
+        <ButtonPrimary onClick={toggleWalletModal}>Connect Wallet</ButtonPrimary>
       </MessageWrapper>
     ) : null
   }

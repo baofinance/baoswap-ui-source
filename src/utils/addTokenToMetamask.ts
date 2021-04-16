@@ -1,7 +1,7 @@
 import { Token } from 'uniswap-xdai-sdk'
 
 export async function addTokenToMetamask(ethereum: any, token: Token) {
-  const IMAGE_URL = 'https://raw.githubusercontent.com/1Hive/brightid-honey-faucet/master/app/src/assets/honey.svg'
+  const IMAGE_URL = '/images/bao.png'
   try {
     await ethereum.request({
       method: 'wallet_watchAsset',
