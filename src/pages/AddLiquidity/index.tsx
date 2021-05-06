@@ -28,7 +28,7 @@ import { useDerivedMintInfo, useMintActionHandlers, useMintState } from '../../s
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { useIsExpertMode, useUserDeadline, useUserSlippageTolerance } from '../../state/user/hooks'
 import { TYPE } from '../../theme'
-import { /*calculateGasMargin,*/ calculateSlippageAmount, getRouterContract } from '../../utils'
+import { calculateGasMargin, calculateSlippageAmount, getRouterContract } from '../../utils'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { wrappedCurrency } from '../../utils/wrappedCurrency'
 import AppBody from '../AppBody'
@@ -123,7 +123,6 @@ export default function AddLiquidity({
   async function onAdd() {
     if (!chainId || !library || !account) return
     const router = getRouterContract(chainId, library, account)
-    console.log('Router Address', router)
 
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
     if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB) {
@@ -137,24 +136,25 @@ export default function AddLiquidity({
 
     const deadlineFromNow = Math.ceil(Date.now() / 1000) + deadline
 
-    let method: (...args: any) => Promise<TransactionResponse>,
-      args: Array<string | string[] | number>,
-      value: BigNumber | null
+    let estimate
+    let method: (...args: any) => Promise<TransactionResponse>
+    let args: Array<string | string[] | number>
+    let value: BigNumber | null
     if (currencyA === ETHER || currencyB === ETHER) {
-      const tokenBIsETH = currencyB === ETHER
-      // estimate = router.estimateGas.addLiquidityETH
+      const tokenBisETH = currencyB === ETHER
+      estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
       args = [
-        wrappedCurrency(tokenBIsETH ? currencyA : currencyB, chainId)?.address ?? '', // token
-        (tokenBIsETH ? parsedAmountA : parsedAmountB).raw.toString(), // token desired
-        amountsMin[tokenBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(), // token min
-        amountsMin[tokenBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // eth min
+        wrappedCurrency(tokenBisETH ? currencyA : currencyB, chainId)?.address ?? '', // token
+        (tokenBisETH ? parsedAmountA : parsedAmountB).raw.toString(), // token desired
+        amountsMin[tokenBisETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(), // token min
+        amountsMin[tokenBisETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // eth min
         account,
         deadlineFromNow
       ]
-      value = BigNumber.from((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
+      value = BigNumber.from((tokenBisETH ? parsedAmountB : parsedAmountA).raw.toString())
     } else {
-      // estimate = router.estimateGas.addLiquidity
+      estimate = router.estimateGas.addLiquidity
       method = router.addLiquidity
       args = [
         wrappedCurrency(currencyA, chainId)?.address ?? '',
@@ -171,10 +171,13 @@ export default function AddLiquidity({
 
     setAttemptingTxn(true)
 
-    method(...args, {
-      ...(value ? { value } : {}),
-      gasLimit: 1000000
-    })
+    estimate(...args, value ? { value } : {})
+      .then(estimatedGasLimit =>
+        method(...args, {
+          ...(value ? { value } : {}),
+          gasLimit: calculateGasMargin(estimatedGasLimit)
+        })
+      )
       .then(response => {
         setAttemptingTxn(false)
 
