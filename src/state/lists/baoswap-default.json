@@ -1,10 +1,10 @@
 {
-  "name": "xDAI Default",
+  "name": "Baoswap Default",
   "timestamp": "2021-03-08T14:45:00Z",
   "version": {
     "major": 4,
     "minor": 0,
-    "patch": 1
+    "patch": 2
   },
   "tags": {},
   "logoURI": "https://assets.coingecko.com/coins/images/13547/small/BAO.png",
