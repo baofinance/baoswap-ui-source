@@ -97,16 +97,15 @@ const NetworkCard = styled(YellowCard)`
   padding: 8px 12px;
 `
 
-const UniIcon = styled.div`
+const BaoIcon = styled.div`
   transition: transform 0.3s ease;
   :hover {
     transform: rotate(-5deg);
   }
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    img { 
-      width: 0.25rem;
-    }
-  `};
+  img { 
+    width: 50px;
+    height: 50px;
+  }
 `
 
 const HeaderControls = styled.div`
@@ -148,9 +147,9 @@ export default function Header() {
       <RowBetween style={{ alignItems: 'flex-start' }} padding="1rem 1rem 0 1rem">
         <HeaderElement>
           <Title href=".">
-            <UniIcon>
-              <img src={Logo} alt="logo" height="50px" width="50px" />
-            </UniIcon>
+            <BaoIcon>
+              <img src={Logo} alt="logo"/>
+            </BaoIcon>
             <TitleText>
               {/* <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />*/}
             </TitleText>
